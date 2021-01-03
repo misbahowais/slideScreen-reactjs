@@ -1,7 +1,56 @@
+import { pdf } from '@react-pdf/renderer';
 import React, { useState } from 'react'
 
 export default function ShareScreen(props) {
+    const [cc, setCc] = useState('');
+    const [bcc, setBcc] = useState('');
+    const [emailTo, setEmailTo] = useState('');
+    const [subject, setSubject] = useState('');
+    const [body, setBody] = useState('');
+
+    const submitHandler = (e) => {
+    e.preventDefault();
+    //submitForm({cURL:"mailto:" + emailTo + "?subject=" + subject + "&cc=" + cc + "&body=" + body,cSubmitAs:"PDF"});  
+    }
     
+    return (
+        <form className='form' onSubmit={submitHandler}>
+                <h1>Sent Email</h1>
+                <h4>Email To</h4>
+            <div>
+                <input className="input" type="email" id="emailTo" placeholder="Enter email" required 
+                    onChange={ e => setEmailTo(e.target.value)}/>
+            </div>
+            
+            <h4>Subject</h4>
+            <div>
+                <input className="input" type="text" id="text" placeholder="subject" required 
+                    onChange={ e => setSubject(e.target.value)}/>
+            </div>
+            <h4>cc</h4>
+            <div>
+                <input className="input" type="email" id="CC" placeholder="cc"
+                    onChange={ e => setCc(e.target.value)}/>
+            </div>
+            <h4>bcc</h4>
+            <div>
+                <input className="input" type="email" id="BCC" placeholder="bcc"
+                    onChange={ e => setBcc(e.target.value)}/>
+            </div>
+            <h4>body</h4>
+            <div>
+                <input className="input" type="text" id="text" placeholder="body"
+                    onChange={ e => setBody(e.target.value)}/>
+            </div>
+            <div><br/><br/><br/><br/><br/>
+                <label/>
+                <a href={"mailto:" + emailTo + "?subject=" + subject + "&cc=" + cc + "&bcc=" + bcc + "&body=" + body} style={{position:'absolute', fontSize:30, color:"black"}} className="center">send</a>
+            </div>
+            
+            
+        </form>
+    )
+    /*
     function openWindow() {
         const mail = document.getElementById('mail').value
         if (mail === 'gmail') {
@@ -33,5 +82,5 @@ export default function ShareScreen(props) {
             </div>
         </div>
 
-    )
+    )*/
 }
